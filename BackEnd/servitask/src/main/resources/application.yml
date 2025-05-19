@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/servitask?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
+    username: ${SPRING_DATASOURCE_USERNAME:servitask}
+    password: ${SPRING_DATASOURCE_PASSWORD:servitask}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    show-sql: true
+  security:
+    filter:
+      order: 10
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+app:
+  jwt:
+    secret: ${APP_JWT_SECRET:servitask_jwt_secret_key_should_be_very_long_and_secure_in_production}
+    expiration: ${APP_JWT_EXPIRATION:86400000} # 24 horas em milissegundos
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    com.servitask: DEBUG
